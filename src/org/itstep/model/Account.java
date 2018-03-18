@@ -1,7 +1,7 @@
 package org.itstep.model;
 
 public class Account {
-	private String login;
+	private String login; // login this email.
 	private String password;
 	private String fistName;
 	private String secondName;

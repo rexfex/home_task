@@ -1,21 +1,21 @@
-package org.model;
+package org.itstep.model;
 
 public class Goods {
 	private String asin;
-	private String price;
 	private String name;
+	private int price;
 	private String url;
-	private String imgUrl;
+	private int intalprice;
 	public String getAsin() {
 		return asin;
 	}
 	public void setAsin(String asin) {
 		this.asin = asin;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getName() {
@@ -30,22 +30,27 @@ public class Goods {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getImgUrl() {
-		return imgUrl;
+	public int getIntalPrice() {
+		return intalprice;
 	}
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setIntalPrice(int intalprice) {
+		this.intalprice = intalprice;
 	}
 	public Goods() {
-				// TODO Auto-generated constructor stub
+		
 	}
-	public Goods(String asin, String price, String name, String url, String imgUrl) {
+	public Goods(String asin, String name, int price, String url, int intalprice) {
 		
 		this.asin = asin;
 		this.price = price;
 		this.name = name;
 		this.url = url;
-		this.imgUrl = imgUrl;
+		this.intalprice = intalprice;
 	}
 	
-}
+	
+	
+	}
+	
+	
+
