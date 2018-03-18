@@ -163,7 +163,7 @@ public class ClientImitator {
 		WebElement wlBtnAC = driver.findElement(By.id("add-to-cart-button"));
 		WebElement nameProdukt = driver.findElement(By.id("productTitle"));
 		WebElement nameProdukt1 = driver.findElement(By.id("priceblock_ourprice"));
-		 WebElement nameProdukt2 = driver.findElement(By.className("a-text-strike"));
+		// WebElement nameProdukt2 = driver.findElement(By.className("a-text-strike"));
 		// WebElement nameProdukt2 = driver.findElement(By.id("ListPriceLegalMessage"));
 		good = new Goods(itemAsin, nameProdukt.getText(), ChToInt(nameProdukt1.getText()), driver.getCurrentUrl(), 0);
 		if (GoodDao.get(itemAsin).getName() == null) {
@@ -177,7 +177,7 @@ public class ClientImitator {
 		driver.navigate().back();
 
 		System.out.println(nameProdukt.getText());
-		System.out.println(nameProdukt2.getText());
+//		System.out.println(nameProdukt2.getText());
 		// System.out.println(ChToInt(nameProdukt1.getText()));
 
 		Timer.waitSeconds(5);
