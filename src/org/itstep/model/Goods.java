@@ -5,7 +5,6 @@ public class Goods {
 	private String name;
 	private int price;
 	private String url;
-	private int intalprice;
 	public String getAsin() {
 		return asin;
 	}
@@ -30,22 +29,15 @@ public class Goods {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public int getIntalPrice() {
-		return intalprice;
-	}
-	public void setIntalPrice(int intalprice) {
-		this.intalprice = intalprice;
-	}
 	public Goods() {
 		
 	}
-	public Goods(String asin, String name, int price, String url, int intalprice) {
+	public Goods(String asin, String name, int price, String url) {
 		
 		this.asin = asin;
 		this.price = price;
 		this.name = name;
 		this.url = url;
-		this.intalprice = intalprice;
 	}
 	
 	

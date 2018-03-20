@@ -1,16 +1,26 @@
 package org.itstep.model;
 
+import java.sql.Time;
+
+
 public class GoodAction {
-	private String asin;
-	private String login;
 	private Integer id;
-	private String action;
-	private Integer actionTime;
-	public String getAsin() {
-		return asin;
+	private Time actionTime;
+	private String login;
+	private String asin;
+	private boolean added_to_wl;
+	private boolean added_to_cart;
+	public Integer getId() {
+		return id;
 	}
-	public void setAsin(String asin) {
-		this.asin = asin;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Time getActionTime() {
+		return actionTime;
+	}
+	public void setActionTime(Time actionTime) {
+		this.actionTime = actionTime;
 	}
 	public String getLogin() {
 		return login;
@@ -18,34 +28,37 @@ public class GoodAction {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	public Integer getId() {
-		return id;
+	public String getAsin() {
+		return asin;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setAsin(String asin) {
+		this.asin = asin;
 	}
-	public String getAction() {
-		return action;
+	public boolean isAdded_to_wl() {
+		return added_to_wl;
 	}
-	public void setAction(String action) {
-		this.action = action;
+	public void setAdded_to_wl(boolean added_to_wl) {
+		this.added_to_wl = added_to_wl;
 	}
-	public Integer getActionTime() {
-		return actionTime;
+	public boolean isAdded_to_cart() {
+		return added_to_cart;
 	}
-	public void setActionTime(Integer actionTime) {
-		this.actionTime = actionTime;
+	public void setAdded_to_cart(boolean added_to_cart) {
+		this.added_to_cart = added_to_cart;
+	}
+
+	
+	public GoodAction(String login, String asin, boolean added_to_wl,boolean added_to_cart) {
+		this.login = login;
+		this.asin = asin;
+		this.added_to_wl = added_to_wl;
+		this.added_to_cart = added_to_cart;
 	}
 	public GoodAction() {
 		// TODO Auto-generated constructor stub
 	}
-	public GoodAction(String asin, String login, Integer id, String action, Integer actionTime) {
-		super();
-		this.asin = asin;
-		this.login = login;
-		this.id = id;
-		this.action = action;
-		this.actionTime = actionTime;
-	}
-
+	
+	
+	
+	
 }

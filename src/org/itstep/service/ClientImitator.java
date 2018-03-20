@@ -1,11 +1,15 @@
 package org.itstep.service;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.itstep.dao.ActionDao;
 import org.itstep.dao.GoodDAO;
 import org.itstep.model.Account;
+import org.itstep.model.GoodAction;
 import org.itstep.model.Goods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -106,7 +110,7 @@ public class ClientImitator {
 		return driver;
 	}
 
-	public void addItem(WebDriver driver, String itemAsin, String action) {
+	public void addItem(WebDriver driver, String login, String itemAsin, String goodaction) {
 
 		String startUrl = driver.getCurrentUrl();
 
@@ -156,29 +160,33 @@ public class ClientImitator {
 		}
 
 		/// !!!!!!!!!
-		GoodDAO GoodDao = new GoodDAO();
+		GoodDAO goodDao = new GoodDAO();
 		Goods good = new Goods();
+		ActionDao actionDao = new ActionDao();
+		GoodAction action = new GoodAction();
 
 		WebElement wlBtnWL = driver.findElement(By.id("add-to-wishlist-button-submit"));
 		WebElement wlBtnAC = driver.findElement(By.id("add-to-cart-button"));
 		WebElement nameProdukt = driver.findElement(By.id("productTitle"));
-		WebElement nameProdukt1 = driver.findElement(By.id("priceblock_ourprice"));
-		// WebElement nameProdukt2 = driver.findElement(By.className("a-text-strike"));
-		// WebElement nameProdukt2 = driver.findElement(By.id("ListPriceLegalMessage"));
-		good = new Goods(itemAsin, nameProdukt.getText(), ChToInt(nameProdukt1.getText()), driver.getCurrentUrl(), 0);
-		if (GoodDao.get(itemAsin).getName() == null) {
-			GoodDao.save(good);
+		WebElement price = driver.findElement(By.id("priceblock_ourprice"));
+
+		good = new Goods(itemAsin, nameProdukt.getText(), ChToInt(price.getText()), driver.getCurrentUrl());
+		if (goodDao.get(itemAsin).getName() == null) {
+			goodDao.save(good);
 		}
-		if (action == "wl") {
+
+		if (goodaction == "wl") {
 			wlBtnWL.click();
+			action = new GoodAction(login, itemAsin, true, false);
+			actionDao.save(action);
 
-		} else
+		}
+		if (goodaction == "ac") {
+
 			wlBtnAC.click();
-		driver.navigate().back();
-
-		System.out.println(nameProdukt.getText());
-//		System.out.println(nameProdukt2.getText());
-		// System.out.println(ChToInt(nameProdukt1.getText()));
+			action = new GoodAction(login, itemAsin, false, true);
+			actionDao.save(action);
+		}
 
 		Timer.waitSeconds(5);
 		driver.get(startUrl);

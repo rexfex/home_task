@@ -12,7 +12,7 @@ public class AccountDao {
 	public void save(Account account) {
 		Connection connection = null;
 		PreparedStatement statement = null;
-		String sql = "INSERT INTO account(login,first_name,second_name,password) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO accounts(login,first_name,second_name,password) VALUES(?,?,?,?)";
 		try {
 			connection = DBConnection.getConnection();
 			statement = connection.prepareStatement(sql);
@@ -48,7 +48,7 @@ public class AccountDao {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		String sql = "SELECT * FROM account WHERE login=?";
+		String sql = "SELECT * FROM accounts WHERE login=?";
 
 		try {
 			connection = DBConnection.getConnection();
@@ -85,7 +85,7 @@ public class AccountDao {
 	public void update(String login, Account newAccount) {
 		Connection connection = null;
 		PreparedStatement statement = null;		
-		String sql = "UPDATE account SET first_name=?, second_name=?, login=?, password=? WHERE login=?";		
+		String sql = "UPDATE accounts SET first_name=?, second_name=?, login=?, password=? WHERE login=?";		
 		
 		try {
 			connection = DBConnection.getConnection();
@@ -121,7 +121,7 @@ public class AccountDao {
 	public void delete(String login) {
     	Connection connection = null;
  		PreparedStatement statement = null;
-		String sql = "DELETE FROM account WHERE login=?";		
+		String sql = "DELETE FROM accounts WHERE login=?";		
 		
 		try {
 			connection = DBConnection.getConnection();

@@ -3,18 +3,19 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/postgresql-42.2.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/selenium-server-standalone-3.8.1.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/httpcore-4.4.6.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/httpclient-4.5.3.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/guava-23.0.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/gson-2.8.2.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/commons-exec-1.3.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/client-combined-3.8.1-sources.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/client-combined-3.8.1.jar"/>
-	<classpathentry kind="lib" path="/home/rex/AppS/jee-oxygen/eclipse/eclipse-workspace/HomeTask/lib/selenium/byte-buddy-1.7.5.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/byte-buddy-1.7.5.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/client-combined-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/client-combined-3.8.1-sources.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/commons-exec-1.3.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/guava-23.0.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/AmazonClicker/ButtonClicker/lib/selenium/selenium-server-standalone-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/home_task/lib/selenium"/>
+	<classpathentry kind="lib" path="/home/rexfex/git/home_task/lib/postgresql-42.2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

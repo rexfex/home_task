@@ -12,7 +12,7 @@ public class GoodDAO {
 	public void save(Goods good) {
 		Connection connection = null;
 		PreparedStatement statement = null;
-		String sql = "INSERT INTO goods (asin, name, price, url, intalPrice ) VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO goods (asin, name, price, url ) VALUES(?,?,?,?)";
 
 		try {
 			connection = DBConnection.getConnection();
@@ -21,7 +21,6 @@ public class GoodDAO {
 			statement.setString(2, good.getName());
 			statement.setInt(3, good.getPrice());
 			statement.setString(4, good.getUrl());
-			statement.setInt(5, good.getIntalPrice());
 			statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -62,7 +61,6 @@ public class GoodDAO {
 				good.setAsin(resultSet.getString("asin"));
 				good.setName(resultSet.getString("name"));
 				good.setPrice(resultSet.getInt("price"));
-				good.setIntalPrice(resultSet.getInt("intalPrice"));
 				good.setUrl(resultSet.getString("url"));
 			}
 		} catch (SQLException e) {
@@ -90,7 +88,7 @@ public class GoodDAO {
 	public void update(String asin, Goods newGood) {
 		Connection connection = null;
 		PreparedStatement statement = null;
-		String sql = "UPDATE goods SET asin=?, name=?, price=?, intalPrice=?, url=? WHERE asin=?";
+		String sql = "UPDATE goods SET asin=?, name=?, price=?,  url=? WHERE asin=?";
 
 		try {
 			connection = DBConnection.getConnection();
@@ -100,8 +98,7 @@ public class GoodDAO {
 			statement.setString(1, newGood.getAsin());
 			statement.setString(2, newGood.getName());
 			statement.setInt(3, newGood.getPrice());
-			statement.setInt(4, newGood.getIntalPrice());
-			statement.setString(5, newGood.getUrl());
+			statement.setString(4, newGood.getUrl());
 
 			statement.executeUpdate();
 
