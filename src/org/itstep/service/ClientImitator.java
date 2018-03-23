@@ -25,6 +25,10 @@ public class ClientImitator {
 	private static final String DRIVER_PATH = USER_DIR + SEPARATOR + "lib" + SEPARATOR + "chromedriver";
 
 	private static final String BASE_URL = "https://www.amazon.com";
+	GoodDAO goodDao = new GoodDAO();
+	Goods good = new Goods();
+	ActionDao actionDao = new ActionDao();
+	GoodAction action = new GoodAction();
 
 	public WebDriver getWebDriver() {
 
@@ -43,15 +47,25 @@ public class ClientImitator {
 		WebDriver driver = getWebDriver();
 		Timer.waitSeconds(3);
 		driver.get("https://www.amazon.com");
+	
 		Timer.waitSeconds(5);
 
-		WebElement registerBlock = driver.findElement(By.id("nav-flyout-ya-newCust"));
+		WebElement wlBlock = driver.findElement(By.id("nav-al-wishlist"));
+		WebElement wlLinkElement = wlBlock.findElement(By.tagName("a"));
+
+		String wlLink = wlLinkElement.getAttribute("href");
+
+		driver.get(wlLink);
+		Timer.waitSeconds(5);
+
+		WebElement registerBlock = driver.findElement(By.className("a-button-inner"));
 		WebElement registerLinkElement = registerBlock.findElement(By.tagName("a"));
-
 		String registerLink = registerLinkElement.getAttribute("href");
-
 		driver.get(registerLink);
-		Timer.waitSeconds(10);
+		Timer.waitSeconds(5);
+		WebElement registredBotoon = driver.findElement(By.id("createAccountSubmit"));
+		registredBotoon.click();
+		Timer.waitSeconds(5);
 
 		WebElement nameElement = driver.findElement(By.id("ap_customer_name"));
 		WebElement emailElement = driver.findElement(By.id("ap_email"));
@@ -63,11 +77,20 @@ public class ClientImitator {
 		emailElement.sendKeys(account.getLogin());
 		passwordElement.sendKeys(account.getPassword());
 		checkPasswordElement.sendKeys(account.getPassword());
-
 		submitElement.submit();
+		Timer.waitSeconds(5);
+
+		WebElement createList = driver.findElement(By.id("createList-announce"));
+		createList.click();
+		Timer.waitSeconds(5);
+
+		WebElement WLList = driver.findElement(By.id("WLNEW_list_name"));
+		WLList.sendKeys(" + Wish List");
+		WebElement createWishList = driver.findElement(By.xpath(".//*[text()='Create List']/.."));
+		createWishList.click();
+		Timer.waitSeconds(5);
 
 		String pageLink = driver.getCurrentUrl();
-		Timer.waitSeconds(6);
 		driver.get(pageLink);
 
 		Timer.waitSeconds(10);
@@ -75,42 +98,7 @@ public class ClientImitator {
 		return driver;
 	}
 
-	public WebDriver loginAmazonAccount(Account account) {
-		WebDriver driver = getWebDriver();
-
-		Timer.waitSeconds(3);
-		driver.get(BASE_URL);
-		Timer.waitSeconds(5);
-
-		WebElement loginBlock = driver.findElement(By.id("nav-flyout-ya-signin"));
-		WebElement loginLinkElement = loginBlock.findElement(By.tagName("a"));
-
-		String loginLink = loginLinkElement.getAttribute("href");
-
-		loginLink = loginLink.contains(BASE_URL) ? loginLink : BASE_URL + loginLink;
-		driver.get(loginLink);
-		Timer.waitSeconds(5);
-
-		WebElement emailElement = driver.findElement(By.id("ap_email"));
-		WebElement submitElement = driver.findElement(By.id("continue"));
-
-		emailElement.sendKeys(account.getLogin());
-		submitElement.click();
-		Timer.waitSeconds(5);
-
-		WebElement passwordElement = driver.findElement(By.id("ap_password"));
-		WebElement submitElementP = driver.findElement(By.id("signInSubmit"));
-		passwordElement.sendKeys(account.getPassword());
-		submitElementP.submit();
-		Timer.waitSeconds(5);
-
-		String currentPage = driver.getCurrentUrl();
-		driver.get(currentPage);
-
-		return driver;
-	}
-
-	public void addItem(WebDriver driver, String login, String itemAsin, String goodaction) {
+	public void addItemToWl(WebDriver driver, String login, String itemAsin) {
 
 		String startUrl = driver.getCurrentUrl();
 
@@ -159,14 +147,7 @@ public class ClientImitator {
 			}
 		}
 
-		/// !!!!!!!!!
-		GoodDAO goodDao = new GoodDAO();
-		Goods good = new Goods();
-		ActionDao actionDao = new ActionDao();
-		GoodAction action = new GoodAction();
-
 		WebElement wlBtnWL = driver.findElement(By.id("add-to-wishlist-button-submit"));
-		WebElement wlBtnAC = driver.findElement(By.id("add-to-cart-button"));
 		WebElement nameProdukt = driver.findElement(By.id("productTitle"));
 		WebElement price = driver.findElement(By.id("priceblock_ourprice"));
 
@@ -174,27 +155,27 @@ public class ClientImitator {
 		if (goodDao.get(itemAsin).getName() == null) {
 			goodDao.save(good);
 		}
+		wlBtnWL.click();
 
-		if (goodaction == "wl") {
-			wlBtnWL.click();
-			action = new GoodAction(login, itemAsin, true, false);
-			actionDao.save(action);
-
-		}
-		if (goodaction == "ac") {
-
-			wlBtnAC.click();
-			action = new GoodAction(login, itemAsin, false, true);
-			actionDao.save(action);
-		}
+		action = new GoodAction(login, itemAsin, true, false);
+		actionDao.save(action);
 
 		Timer.waitSeconds(5);
 		driver.get(startUrl);
 	}
 
+	public void addItemToCart(WebDriver driver, String login, String itemAsin) {
+
+		driver.get(goodDao.get(itemAsin).getUrl());
+		
+		WebElement wlBtnAC = driver.findElement(By.id("add-to-cart-button"));
+		wlBtnAC.click();
+		action = new GoodAction(login, itemAsin, false, true);
+		actionDao.update(itemAsin, action);
+	}
+
 	public static int ChToInt(String ch) {
 		char[] charArray = new char[10];
-		// char[] charArray1 = new char[10];
 		charArray = ch.toCharArray();
 		for (int i = 1; i < charArray.length; i++) {
 			charArray[i - 1] = charArray[i];
@@ -206,4 +187,5 @@ public class ClientImitator {
 		return priceToInt;
 
 	}
+
 }

@@ -63,7 +63,7 @@ public class ActionDao {
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				goodAction.setId(resultSet.getInt("id"));
-				goodAction.setActionTime(resultSet.getTime("time_action"));
+				goodAction.setActionTime(resultSet.getTime("actiontime"));
 				goodAction.setAsin(resultSet.getString("asin"));
 				goodAction.setLogin(resultSet.getString("login"));
 				goodAction.setAdded_to_wl(resultSet.getBoolean("added_to_wl"));
@@ -91,22 +91,22 @@ public class ActionDao {
 		return goodAction;
 	}
 
-	public void update(String login, GoodAction newgoodsAction) {
+	public void update(String asin, GoodAction newgoodsAction) {
 		Connection connection = null;
 		PreparedStatement statement = null;
-		String sql = "UPDATE good_actions SET  login=?, asin=?, added_to_wl=?,added_to_cart=? WHERE login=?";
+		String sql = "UPDATE good_actions SET  actionTime =?, login=?, asin=?, added_to_wl=?,added_to_cart=? WHERE asin=?";
 
 		try {
 			connection = DBConnection.getConnection();
 			statement = connection.prepareStatement(sql);
-			statement.setString(2, login);
+			statement.setString(6, asin);
 
-			// statement.setTime(1, newgoodsAction.get());
+			 statement.setTime(1, newgoodsAction.getActionTime());
 
-			statement.setString(1, newgoodsAction.getLogin());
-			statement.setString(2, newgoodsAction.getAsin());
-			statement.setBoolean(3, newgoodsAction.isAdded_to_wl());
-			statement.setBoolean(4, newgoodsAction.isAdded_to_cart());
+			statement.setString(2, newgoodsAction.getLogin());
+			statement.setString(3, newgoodsAction.getAsin());
+			statement.setBoolean(4, newgoodsAction.isAdded_to_wl());
+			statement.setBoolean(5, newgoodsAction.isAdded_to_cart());
 
 			statement.executeUpdate();
 
@@ -131,7 +131,7 @@ public class ActionDao {
 	public void delete(String login) {
 		Connection connection = null;
 		PreparedStatement statement = null;
-		String sql = "DELETE FROM good_action WHERE login=?";
+		String sql = "DELETE FROM good_actions WHERE login=?";
 
 		try {
 			connection = DBConnection.getConnection();

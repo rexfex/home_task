@@ -1,15 +1,7 @@
 package org.itstep;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Calendar;
 
 import org.itstep.dao.AccountDao;
-import org.itstep.dao.GoodDAO;
 import org.itstep.model.Account;
 import org.itstep.service.ClientImitator;
 import org.itstep.service.Timer;
@@ -18,33 +10,29 @@ import org.openqa.selenium.WebDriver;
 public class Runner {
 	static ClientImitator imitator = new ClientImitator();
 	static WebDriver driver;
-	static Account acc = new Account();
 
 	public static void main(String[] args) {
-
-		acc = new Account("3114297@mail.ru", "function", "Serge", "Drugiy");
-		driver = loginAndSaveDriver(acc);
-
-		imitator.addItem(driver, acc.getLogin(), "B01G9ADQYG", "wl");
-		imitator.addItem(driver, acc.getLogin(), "B01FXN3E74", "wl");
-		imitator.addItem(driver, acc.getLogin(), "B01FXN3E74", "ac");
-
-		acc = new Account("rexfex777@ukr.net", "function", "Serge", "Drugiy");
-		driver = loginAndSaveDriver(acc);
-
-		imitator.addItem(driver, acc.getLogin(), "B01G9ADQYG", "wl");
-		imitator.addItem(driver, acc.getLogin(), "B01FXN3E74", "wl");
-		imitator.addItem(driver, acc.getLogin(), "B01FXN3E74", "ac");
-
-		// Account acc2 = new Account("rexfex777@ukr.net", "function", "Serge",
-		// "Drugiy");
-		// Account acc3 = new Account("firstasd@mail.ru", "qwertyuiop", "Ivan",
-		// "Tretiy");
+		String[] login = {"jdfjfjf@mail.ru", "jdfjfjf1@mail.ru","jdfjfjf2@mail.ru"} ;
+		
+		for (int i = 0; i < login.length; i++) {
+		Account acc = new Account(login[i], "qwertyuiop", "qqq", "Tresssdtiy");
+		driver =newLoginAndSaveDriver(acc);
+		imitator.addItemToWl(driver, acc.getLogin(), "B01IGO4A4S");
+		imitator.addItemToWl(driver, acc.getLogin(), "B01IGMTBEO");
+		imitator.addItemToCart (driver,acc.getLogin(),"B01IGMTBEO");
+		driver.close();
+		}
+		
+		
+		
 	}
 
-	public static WebDriver loginAndSaveDriver(Account acc) {
+	
+	public static WebDriver newLoginAndSaveDriver(Account acc) {
+		
 		AccountDao accDao = new AccountDao();
-		WebDriver driver = imitator.loginAmazonAccount(acc);
+		
+		driver = imitator.registerAmazonAccount(acc);
 		Timer.waitSeconds(5);
 		if ((driver.getPageSource().contains("Hello, "))) {
 			if (accDao.get(acc.getLogin()).getPassword() == null) {
@@ -57,5 +45,4 @@ public class Runner {
 		return driver;
 
 	}
-
 }
